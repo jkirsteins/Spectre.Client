@@ -11,6 +11,21 @@
     public static class SaltEdgeClientExtensions
     {
         /// <summary>
+        /// Get all accounts available through a given connection.
+        /// </summary>
+        /// <param name="client">API client.</param>
+        /// <param name="connectionId">Connection ID.</param>
+        /// <returns>An enumerable of all the accounts.</returns>
+        public static async Task<IEnumerable<GetAccountsResponse>> GetAccounts(this ISaltEdgeClient client, string connectionId)
+        {
+            return await Wrap(async () =>
+            {
+                var result = await client.GetAccountsCall(connectionId).ConfigureAwait(false);
+                return result.data;
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get all connections for a customer.
         /// </summary>
         /// <param name="client">API client.</param>

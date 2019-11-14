@@ -36,5 +36,31 @@ namespace Spectre.Client.Test
             Assert.Equal(ConnectionStatus.inactive, res.data.First().status);
             Assert.Equal(Categorization.personal, res.data.First().categorization);
         }
+
+        /// <summary>
+        /// Test the response when fetching accounts.
+        /// </summary>
+        /// <returns>Task value.</returns>
+        [Fact]
+        public async Task TestGetAccountsCall()
+        {
+            var gitHubApi = ClientFactory.Create(req =>
+            {
+                Assert.Equal("https://example.com/accounts?connection_id={my_id}", req.RequestUri.ToString());
+                Assert.Equal("GET", req.Method.Method);
+
+                var response = new HttpResponseMessage();
+                response.Content = new StringContent(@"{""data"":[{""id"":""10017529"",""connection_id"":""7502064"",""name"":""Simple account 1 MasterCard"",""nature"":""card"",""balance"":2006.11,""currency_code"":""EUR"",""extra"":{""iban"":""DE11100110012612442222"",""swift"":""ABCDEFGH"",""status"":""active"",""card_type"":""master_card"",""sort_code"":""65-43-21"",""client_name"":""John Smith"",""account_name"":""123456"",""current_date"":""2019-11-13"",""current_time"":""22:41:00"",""account_number"":""123456"",""transactions_count"":{""posted"":17,""pending"":0},""last_posted_transaction_id"":""1991514607""},""created_at"":""2019-11-13T22:41:23Z"",""updated_at"":""2019-11-13T22:41:23Z""},{""id"":""10017533"",""connection_id"":""7502064"",""name"":""Simple account 2"",""nature"":""account"",""balance"":2008.13,""currency_code"":""USD"",""extra"":{""iban"":""DE84100110012612443333"",""cards"":[""1234....5678"",""*8765""],""swift"":""ABCDEFGJ"",""status"":""active"",""sort_code"":""65-43-22"",""client_name"":""John Smith"",""account_name"":""123457"",""current_date"":""2019-11-13"",""current_time"":""22:41:00"",""account_number"":""123457"",""transactions_count"":{""posted"":18,""pending"":0},""last_posted_transaction_id"":""1991514679""},""created_at"":""2019-11-13T22:41:23Z"",""updated_at"":""2019-11-13T22:41:23Z""},{""id"":""10017537"",""connection_id"":""7502064"",""name"":""Simple account 3"",""nature"":""credit"",""balance"":-2008.13,""currency_code"":""USD"",""extra"":{""iban"":""DE60100110012612444444"",""cards"":[""1234....8765"",""*5678""],""swift"":""ABCDEFGK"",""status"":""active"",""sort_code"":""65-43-23"",""client_name"":""John Smith"",""account_name"":""123458"",""credit_limit"":5000.0,""current_date"":""2019-11-13"",""current_time"":""22:41:00"",""account_number"":""123458"",""available_amount"":2991.87,""transactions_count"":{""posted"":15,""pending"":0},""last_posted_transaction_id"":""1991514739""},""created_at"":""2019-11-13T22:41:23Z"",""updated_at"":""2019-11-13T22:41:23Z""},{""id"":""10017541"",""connection_id"":""7502064"",""name"":""Account 4 merchant testing"",""nature"":""account"",""balance"":1997.41,""currency_code"":""GBP"",""extra"":{""iban"":""GB33BUKB20201555555555"",""swift"":""ABCDEFGH"",""status"":""active"",""sort_code"":""65-43-21"",""client_name"":""John Smith"",""account_name"":""Local Merchant"",""account_number"":""300-200-100"",""transactions_count"":{""posted"":6,""pending"":0},""last_posted_transaction_id"":""1991514763""},""created_at"":""2019-11-13T22:41:23Z"",""updated_at"":""2019-11-13T22:41:24Z""},{""id"":""10017545"",""connection_id"":""7502064"",""name"":""5325 **** **** 1285"",""nature"":""credit_card"",""balance"":-2008.13,""currency_code"":""USD"",""extra"":{""status"":""active"",""card_type"":""master_card"",""client_name"":""John Smith"",""expiry_date"":""2021-11-01"",""account_name"":""**** 1285 MasterCard"",""credit_limit"":10000.0,""blocked_amount"":13.0,""closing_balance"":-1004.07,""available_amount"":7978.87,""next_payment_date"":""2019-12-03"",""transactions_count"":{""posted"":0,""pending"":0},""next_payment_amount"":133.88},""created_at"":""2019-11-13T22:41:24Z"",""updated_at"":""2019-11-13T22:41:24Z""}],""meta"":{""next_id"":null,""next_page"":null}}", Encoding.UTF8, "application/json");
+
+                return Task.FromResult(response);
+            });
+
+            var res = await gitHubApi.GetAccountsCall("{my_id}").ConfigureAwait(false);
+
+            Assert.Equal(5, res.data.Count());
+            Assert.Equal(2006.11m, res.data.First().balance);
+            Assert.Equal(17, res.data.First().extra.transactions_count.posted);
+            Assert.Equal(0, res.data.First().extra.transactions_count.pending);
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Spectre.Client
     /// <summary>
     /// https://docs.saltedge.com/account_information/v5/#fetch-connections.
     /// </summary>
-    public class GetConnectionsResponse
+    public class GetConnectionsResponse : TimestampedResponse
     {
 #pragma warning disable IDE1006, SA1300, CA1707, SA1609 // Naming Styles
         /// <summary>
@@ -44,16 +44,6 @@ namespace Spectre.Client
         /// Gets or sets when the next refresh will be available. May contain null value if connection has automatic_fetch set as false, or is already processing.
         /// </summary>
         public DateTime next_refresh_possible_at { get; set; }
-
-        /// <summary>
-        /// Gets or sets the creation date.
-        /// </summary>
-        public DateTime created_at { get; set; }
-
-        /// <summary>
-        /// Gets or sets the update date.
-        /// </summary>
-        public DateTime updated_at { get; set; }
 
         /// <summary>
         /// Gets or sets the connection status.
