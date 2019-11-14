@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2019 Jānis Kiršteins. All rights reserved. */
+﻿/* Copyright (c) 2019 Jānis Kiršteins. */
 
 #pragma warning disable CA1032 // Exception constructors
 
