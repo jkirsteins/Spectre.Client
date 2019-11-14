@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>JanisKirsteins.SaltEdge.Spectre.Client</PackageId>
+    <PackageId>Spectre.Client</PackageId>
     <Version>0.1.0</Version>
     <Authors>jkirsteins</Authors>
     <Title>SaltEdge Spectre API Client</Title>
