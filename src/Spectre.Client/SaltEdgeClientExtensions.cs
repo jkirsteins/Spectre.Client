@@ -17,7 +17,7 @@
         /// <param name="connectionId">Connection ID.</param>
         /// <param name="accountId">Account ID.</param>
         /// <returns>An enumerable of all the transactions in a given accounts (not before the consent start date).</returns>
-        public static async Task<IEnumerable<GetTransactionsResponse>> GetAccounts(this ISaltEdgeClient client, string connectionId, string accountId)
+        public static async Task<IEnumerable<GetTransactionsResponse>> GetTransactions(this ISaltEdgeClient client, string connectionId, string accountId)
         {
             return await Wrap(async () =>
             {

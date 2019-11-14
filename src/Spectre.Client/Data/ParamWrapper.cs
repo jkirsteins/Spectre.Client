@@ -3,6 +3,7 @@
 namespace Spectre.Client
 {
     using System;
+    using Newtonsoft.Json;
     using Refit;
 
     /// <summary>
@@ -16,6 +17,12 @@ namespace Spectre.Client
         /// Gets or sets data.
         /// </summary>
         public T data { get; set; }
+
+        /// <summary>
+        /// Gets or sets the response meta.
+        /// </summary>
+        [JsonProperty("meta", NullValueHandling=NullValueHandling.Ignore)]
+        public ResponseMeta meta { get; set; }
 #pragma warning restore IDE1006, SA1300, CA1707, SA1609
     }
 }

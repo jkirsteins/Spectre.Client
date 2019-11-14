@@ -41,6 +41,7 @@ services.AddScoped(_ => RestService.For<ISaltEdgeClient>(
 - Request a connect session: `ISaltEdgeClient.CreateConnectSession`
 - Fetch customer connections: `ISaltEdgeClient.GetConnections`
 - Fetch connection accounts: `ISaltEdgeClient.GetAccounts`
+- Fetch transactions: `ISaltEdgeClient.GetTransactions`
 
 ---
 

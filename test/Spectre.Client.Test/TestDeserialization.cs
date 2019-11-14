@@ -15,6 +15,37 @@ namespace Spectre.Client.Test
     public class TestDeserialization
     {
         /// <summary>
+        /// Test the serialization of ParamWrapper meta (it should be deserialized,
+        /// but not included in requests).
+        /// </summary>
+        /// <returns>Task value.</returns>
+        [Fact]
+        public async Task TestParamWrapperMeta()
+        {
+            var gitHubApi = ClientFactory.Create(async req =>
+            {
+                var request = await req.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Assert.DoesNotContain("meta", request, System.StringComparison.Ordinal);
+
+                var response = new HttpResponseMessage();
+                response.Content = new StringContent(@"{""meta"": {""next_id"": ""123"", ""next_page"": ""/api/uri?with_params=5""}, ""data"": null}", Encoding.UTF8, "application/json");
+
+                return response;
+            });
+
+            var pw = new ParamWrapper<CreateConnectSessionRequest>
+            {
+                data = new CreateConnectSessionRequest(),
+            };
+            var res = await gitHubApi.CreateConnectSessionCall(pw).ConfigureAwait(false);
+
+            Assert.Null(res.data);
+            Assert.NotNull(res.meta);
+            Assert.Equal("123", res.meta.next_id);
+            Assert.Equal("/api/uri?with_params=5", res.meta.next_page.ToString());
+        }
+
+        /// <summary>
         /// Test the response when fetching connections.
         /// </summary>
         /// <returns>Task value.</returns>
