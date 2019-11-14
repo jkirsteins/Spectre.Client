@@ -44,6 +44,15 @@ namespace Spectre.Client
         /// <returns>Wrapped enumerable of <see cref="GetAccountsResponse"/>.</returns>
         [Get("/accounts")]
         Task<ParamWrapper<IEnumerable<GetAccountsResponse>>> GetAccountsCall(string connection_id);
+
+        /// <summary>
+        /// https://docs.saltedge.com/account_information/v5/#fetch-transactions-for-an-account.
+        /// </summary>
+        /// <param name="connection_id">Connection identifier.</param>
+        /// <param name="account_id">Account identifier.</param>
+        /// <returns>Wrapped enumerable of <see cref="GetAccountsResponse"/>.</returns>
+        [Get("/transactions")]
+        Task<ParamWrapper<IEnumerable<GetTransactionsResponse>>> GetTransactionsCall(string connection_id, string account_id);
 #pragma warning restore IDE1006, SA1300, CA1707, SA1609
     }
 }

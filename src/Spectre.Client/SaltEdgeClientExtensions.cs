@@ -15,6 +15,22 @@
         /// </summary>
         /// <param name="client">API client.</param>
         /// <param name="connectionId">Connection ID.</param>
+        /// <param name="accountId">Account ID.</param>
+        /// <returns>An enumerable of all the transactions in a given accounts (not before the consent start date).</returns>
+        public static async Task<IEnumerable<GetTransactionsResponse>> GetAccounts(this ISaltEdgeClient client, string connectionId, string accountId)
+        {
+            return await Wrap(async () =>
+            {
+                var result = await client.GetTransactionsCall(connectionId, accountId).ConfigureAwait(false);
+                return result.data;
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get all accounts available through a given connection.
+        /// </summary>
+        /// <param name="client">API client.</param>
+        /// <param name="connectionId">Connection ID.</param>
         /// <returns>An enumerable of all the accounts.</returns>
         public static async Task<IEnumerable<GetAccountsResponse>> GetAccounts(this ISaltEdgeClient client, string connectionId)
         {

@@ -10,7 +10,7 @@ namespace Spectre.Client
     /// </summary>
     public class AttemptStage
     {
-#pragma warning disable IDE1006, SA1300, CA1707, SA1609
+#pragma warning disable IDE1006, SA1300, CA1707, SA1609, CA2227
         /// <summary>
         /// Attempt stage names.
         /// </summary>
@@ -83,9 +83,9 @@ namespace Spectre.Client
         public IEnumerable<string> interactive_fields_names { get; set; }
 
         /// <summary>
-        /// Gets the interactive fields.
+        /// Gets or sets the interactive fields.
         /// </summary>
-        public IDictionary<string, IEnumerable<FieldOption>> interactive_fields_options { get; }
+        public IDictionary<string, IEnumerable<FieldOption>> interactive_fields_options { get; set; }
 
         /// <summary>
         /// Gets or sets the creation date.
@@ -96,6 +96,6 @@ namespace Spectre.Client
         /// Gets or sets the update date.
         /// </summary>
         public DateTime updated_at { get; set; }
-#pragma warning restore IDE1006, SA1300, CA1707, SA1609
+#pragma warning restore IDE1006, SA1300, CA1707, SA1609, CA2227
     }
 }

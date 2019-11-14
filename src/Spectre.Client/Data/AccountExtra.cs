@@ -10,7 +10,7 @@ namespace Spectre.Client
     /// </summary>
     public class AccountExtra
     {
-#pragma warning disable IDE1006, SA1300, CA1707, SA1609 // Naming Styles
+#pragma warning disable IDE1006, SA1300, CA1707, SA1609, CA2227
         /// <summary>
         /// Gets or sets the account IBAN number.
         /// </summary>
@@ -27,9 +27,9 @@ namespace Spectre.Client
         public string account_number { get; set; }
 
         /// <summary>
-        /// Gets the list of crypto codes and their amounts assigned to investment account.
+        /// Gets or sets the list of crypto codes and their amounts assigned to investment account.
         /// </summary>
-        public IList<object> assets { get; }
+        public IList<object> assets { get; set; }
 
         /// <summary>
         /// Gets or sets the available amount in account’s currency.
@@ -47,9 +47,9 @@ namespace Spectre.Client
         public CardType card_type { get; set; }
 
         /// <summary>
-        /// Gets the list of masked card numbers.
+        /// Gets or sets the list of masked card numbers.
         /// </summary>
-        public IList<string> cards { get; }
+        public IList<string> cards { get; set; }
 
         /// <summary>
         /// Gets or sets the account client owner.
@@ -150,6 +150,6 @@ namespace Spectre.Client
         /// Gets or sets the amount of units owned(used with unit_price, available for investment accounts nature only).
         /// </summary>
         public decimal units { get; set; }
-#pragma warning restore IDE1006, SA1300, CA1707, SA1609
+#pragma warning restore IDE1006, SA1300, CA1707, SA1609, CA2227
     }
 }

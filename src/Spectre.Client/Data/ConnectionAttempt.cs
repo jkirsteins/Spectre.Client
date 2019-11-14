@@ -10,7 +10,7 @@ namespace Spectre.Client
     /// </summary>
     public class ConnectionAttempt
     {
-#pragma warning disable IDE1006, SA1300, CA1707, SA1609
+#pragma warning disable IDE1006, SA1300, CA1707, SA1609, CA2227
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -77,9 +77,9 @@ namespace Spectre.Client
         public bool categorize { get; set; }
 
         /// <summary>
-        /// Gets the custom fields.
+        /// Gets or sets the custom fields.
         /// </summary>
-        public IDictionary<string, string> custom_fields { get; }
+        public IDictionary<string, string> custom_fields { get; set; }
 
         /// <summary>
         /// Gets or sets the device type.
@@ -179,6 +179,6 @@ namespace Spectre.Client
         /// Gets or sets the last stage of the connection attempt.
         /// </summary>
         public AttemptStage last_stage { get; set; }
-#pragma warning restore IDE1006, SA1300, CA1707, SA1609
+#pragma warning restore IDE1006, SA1300, CA1707, SA1609, CA2227
     }
 }
