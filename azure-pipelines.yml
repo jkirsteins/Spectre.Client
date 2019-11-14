@@ -7,8 +7,10 @@ trigger:
 - master
 
 variables:
-  version: 0.1.0
+  versionPrefix: 0.1.1
   buildConfiguration: Release
+
+name: $(versionPrefix).$(Build.BuildId)
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -45,12 +47,13 @@ steps:
   displayName: "Pack projects"
   inputs:
     command: 'pack'
+    versioningScheme: byBuildNumber
     projects: 'src/**/*.csproj'
 
 - task: NuGetCommand@2
-  displayName: "Publish projects"
+  displayName: "Publish to NuGet"
   inputs:
     command: 'push'
-    packagesToPush: '**/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: NuGet
+    allowPackageConflicts: true
