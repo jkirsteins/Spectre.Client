@@ -115,6 +115,21 @@
             }).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Get a list of all customers.
+        /// </summary>
+        /// <param name="client">API client.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        public static async Task<IEnumerable<GetCustomersResponse>> GetCustomers(this ISaltEdgeClient client)
+        {
+            return await Wrap(async () =>
+            {
+                var result = await client.GetCustomersCall().ConfigureAwait(false);
+
+                return result.data;
+            }).ConfigureAwait(false);
+        }
+
         internal static async Task<T> Wrap<T>(Func<Task<T>> func)
         {
             try
