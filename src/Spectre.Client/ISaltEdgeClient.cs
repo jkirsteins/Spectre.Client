@@ -53,6 +53,13 @@ namespace Spectre.Client
         /// <returns>Wrapped enumerable of <see cref="GetAccountsResponse"/>.</returns>
         [Get("/transactions")]
         Task<ParamWrapper<IEnumerable<GetTransactionsResponse>>> GetTransactionsCall(string connection_id, string account_id);
+
+        /// <summary>
+        /// https://docs.saltedge.com/account_information/v5/#customers.
+        /// </summary>
+        /// <returns>Wrapped enumerable of <see cref="GetCustomersResponse"/>.</returns>
+        [Get("/customers")]
+        Task<ParamWrapper<IEnumerable<GetCustomersResponse>>> GetCustomersCall();
 #pragma warning restore IDE1006, SA1300, CA1707, SA1609
     }
 }
