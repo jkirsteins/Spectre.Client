@@ -173,7 +173,7 @@ namespace Spectre.Client
         /// <summary>
         /// Gets or sets the success datetime.
         /// </summary>
-        public DateTime success_at { get; set; }
+        public DateTime? success_at { get; set; }
 
         /// <summary>
         /// Gets or sets the last stage of the connection attempt.
